@@ -13,11 +13,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={GirlImage} alt="美少女" style={{ width: '300px' }} />
-        <h1>今日の献立</h1>
+        <h1 className="Header-title">美少女の献立提案</h1>
+      </header>
+      <div className="Content">
+        <img src={GirlImage} alt="美少女" className="Girl-image" />
+        <h2>今日の献立</h2>
         <button onClick={handleSuggest}>献立を提案する</button>
         <p>{menu ? `「${menu}がいいですね！」` : ''}</p>
-      </header>
+      </div>
     </div>
   );
 }
