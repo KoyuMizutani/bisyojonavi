@@ -1,45 +1,57 @@
 .App {
-  text-align: center;
-  background-color: #fff0f5; /* 非常に淡いピンク色 */
-}
-
-.App-header {
-  background-color: #ff69b4; /* 鮮やかなピンク色 */
-  padding: 20px 0;
-  color: white;
-  text-align: center;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.Header-title {
-  font-size: 2em;
-  margin: 0;
-}
-
-.Content {
-  margin-top: 120px; /* ヘッダーの高さに合わせて調整 */
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: #fddde6; /* 優しいピンク色 */
 }
 
-.Girl-image {
+.App-header {
+  width: 100%;
+  background-color: #fbb1c1; /* より優しいピンク色 */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header-title {
+  font-size: 1.8em;
+}
+
+.Menu-icon {
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.left-panel, .right-panel {
+  flex: 1;
+  margin: 20px;
+}
+
+.Girl-image, .Menu-image {
   width: 300px;
-  margin: 20px 0;
+  display: block;
+  margin-bottom: 20px;
 }
 
 button {
-  background-color: #ffccdd;
-  border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px;
+  background-color: #ffccdd;
+  border: none;
   color: #600030;
 }
 
@@ -49,9 +61,4 @@ button:hover {
 
 button:active {
   background-color: #cc6688;
-}
-
-p {
-  font-size: 1.2em;
-  margin-top: 20px;
 }
