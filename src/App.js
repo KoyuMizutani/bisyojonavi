@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import GirlImage from './girl.png';  // 画像ファイルをインポート
 
@@ -6,19 +6,35 @@ function App() {
   const [menu, setMenu] = useState('');
   const [menuImage, setMenuImage] = useState('');
   const [recipe, setRecipe] = useState('');
+  const [affection, setAffection] = useState(0);  // 好感度の状態
+  const [currentTime, setCurrentTime] = useState(new Date());  // 現在時刻の状態
+
+  // 現在時刻を1秒ごとに更新
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timerId);  // コンポーネントアンマウント時にクリーンアップ
+  }, []);
+
+  const formattedTime = {
+    hours: currentTime.getHours().toString().padStart(2, '0'),
+    minutes: currentTime.getMinutes().toString().padStart(2, '0')
+  };
 
   const handleSuggest = () => {
     const menus = [
-      { name: '寿司', image: './sushi.jpeg', recipe: 'お寿司の作り方...' },
-      { name: 'カレーライス', image: './curry.jpeg', recipe: 'カレーライスの作り方...' },
-      { name: 'ラーメン', image: './ramen.jpeg', recipe: 'ラーメンの作り方...' },
-      { name: '天ぷら', image: './tenpura.jpeg', recipe: '天ぷらの作り方...' },
-      { name: 'お好み焼き', image: './okonomiyaki.jpeg', recipe: 'お好み焼きの作り方...' }
+      { name: '寿司', image: '/path-to-sushi-image.jpg', recipe: 'お寿司の作り方...' },
+      { name: 'カレーライス', image: '/path-to-curry-image.jpg', recipe: 'カレーライスの作り方...' },
+      { name: 'ラーメン', image: '/path-to-ramen-image.jpg', recipe: 'ラーメンの作り方...' },
+      { name: '天ぷら', image: '/path-to-tempura-image.jpg', recipe: '天ぷらの作り方...' },
+      { name: 'お好み焼き', image: '/path-to-okonomiyaki-image.jpg', recipe: 'お好み焼きの作り方...' }
     ];
     const selectedMenu = menus[Math.floor(Math.random() * menus.length)];
     setMenu(selectedMenu.name);
     setMenuImage(selectedMenu.image);
     setRecipe(selectedMenu.recipe);
+    setAffection(prev => prev + 20);  // 好感度を増加
   };
 
   return (
@@ -29,8 +45,14 @@ function App() {
       </header>
       <div className="content">
         <div className="left-panel">
+          <div className="current-time">
+            {formattedTime.hours}<span className="blinking-colon">:</span>{formattedTime.minutes}
+          </div>
           <img src={GirlImage} alt="美少女" className="Girl-image" />
           <button onClick={handleSuggest}>献立を提案する</button>
+          <div className="affection-meter">
+            <div className="affection-bar" style={{ width: `${affection}%` }}></div>
+          </div>
         </div>
         <div className="right-panel">
           {menu && (
