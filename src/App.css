@@ -11,19 +11,36 @@ html, body {
   align-items: center;
   height: 100vh;
   padding: 0px;
-  background-color: #fddde6; /* 優しいピンク色 */
+  box-sizing: border-box;
+  position: relative; /* 重ね合わせの管理のためにrelativeを設定 */
+  overflow: hidden; /* 背景がはみ出さないようにする */
+}
+
+.App-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./background.png'); /* 背景画像 */
+  background-size: cover; /* 画像をカバーとして設定 */
+  background-position: center; /* 中央に配置 */
+  filter: blur(2px); /* ブラー効果を適用 */
+  z-index: -1; /* 他のコンテンツの背後に配置 */
 }
 
 .App-header {
   width: 100%;
-  background-color: #fbb1c1; /* より優しいピンク色 */
+  background-color: #ff9bb0; 
   color: white;
-  padding: 5px 20px;;
+  padding: 0px 20px;;
   /* padding-left: 50px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  border-bottom: 2px solid rgb(226, 176, 176); /* 下に白線を追加 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽いボックスシャドウを追加 */
 }
 
 .Header-title {
@@ -43,10 +60,28 @@ html, body {
   align-items: start;
 }
 
-.left-panel, .right-panel {
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  /* 要素を垂直方向に中央配置 */
+  margin: 20px;
+}
+
+.right-panel {
   flex: 1;
   margin: 20px;
-  margin-left: 30px;
+  padding: 20px;
+  background-color: #ffffff; /* 白色の背景 */
+  border-radius: 15px; /* 角を丸くする */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平中央に配置 */
+  justify-content: center; /* 垂直中央に配置 */
+  height: calc(100% - 40px); /* ビューポートの高さから上下のマージンを引いた高さ */
+  box-sizing: border-box;
 }
 
 .blinking-colon {
@@ -60,30 +95,39 @@ html, body {
 }
 
 .current-time {
-  font-size: 24px;
+  font-size: 50px;
   color: #333;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
+  text-shadow: 
+    -1px -1px 0 #fff,  
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
 }
 
 .Girl-image, .Menu-image {
-  width: 300px;
+  width: 270px;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .affection-meter {
   width: 300px;
   height: 20px;
-  background-color: #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
+  background-color: #eee; /* 背景色 */
+  border-radius: 10px; /* 角を丸くする */
+  border: 2px solid white; /* 白い枠線を追加 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 外側の影を追加して立体感を出す */
+  overflow: hidden; /* 内部のバーが枠外に出ないようにする */
+  position: relative; /* 位置関係の基準点を設定 */
 }
 
 .affection-bar {
   height: 100%;
-  background-color: #ff69b4;
-  transition: width 0.5s ease;
+  background-color: #ff69b4; /* バーの色 */
+  border-radius: 8px; /* バーの角も丸くする */
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5); /* 内側に明るい影を追加して立体感を出す */
+  transition: width 0.5s ease; /* 幅の変化にアニメーションを設定 */
 }
 
 
@@ -95,6 +139,7 @@ button {
   background-color: #ffccdd;
   border: none;
   color: #600030;
+  margin-top: 10px;
 }
 
 button:hover {
