@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import GirlImage from './girl.png';  // 画像ファイルをインポート
 import GirlSmilingImage from './girl_smiling.png';  // 画像ファイルをインポート
+import BentoImage from './bento.jpg';
 
 function App() {
   const [menu, setMenu] = useState('');
@@ -11,6 +12,9 @@ function App() {
   const maxAffection = 100;  // 好感度の最大値
   const currentGirlImage = affection >= maxAffection ? GirlSmilingImage : GirlImage;
   const [currentTime, setCurrentTime] = useState(new Date());  // 現在時刻の状態
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   // 現在時刻を1秒ごとに更新
   useEffect(() => {
@@ -26,18 +30,17 @@ function App() {
   };
 
   const handleSuggest = () => {
-    const menus = [
-      { name: '寿司', image: '/path-to-sushi-image.jpg', recipe: 'お寿司の作り方...' },
-      { name: 'カレーライス', image: '/path-to-curry-image.jpg', recipe: 'カレーライスの作り方...' },
-      { name: 'ラーメン', image: '/path-to-ramen-image.jpg', recipe: 'ラーメンの作り方...' },
-      { name: '天ぷら', image: '/path-to-tempura-image.jpg', recipe: '天ぷらの作り方...' },
-      { name: 'お好み焼き', image: '/path-to-okonomiyaki-image.jpg', recipe: 'お好み焼きの作り方...' }
-    ];
-    const selectedMenu = menus[Math.floor(Math.random() * menus.length)];
-    setMenu(selectedMenu.name);
-    setMenuImage(selectedMenu.image);
-    setRecipe(selectedMenu.recipe);
-    setAffection(prev => Math.min(prev + 20, maxAffection));  // 好感度を増加
+    setAffection(prev => Math.min(prev + 1, maxAffection));  // 好感度を増加
+  };
+
+  const handleOrder = () => {
+    alert(`注文が確定しました。身長: ${height}cm, 体重: ${weight}kg`);
+    setAffection(prev => Math.min(prev + 20, maxAffection));
+    setOrderPlaced(true);
+  };
+
+  const handleReset = () => {
+    setOrderPlaced(false);
   };
 
   return (
@@ -56,16 +59,34 @@ function App() {
           <div className="affection-meter">
             <div className="affection-bar" style={{ width: `${affection}%` }}></div>
           </div>
-          <button onClick={handleSuggest}>献立を提案する</button>
+          <button onClick={handleSuggest}>なでまわす</button>
         </div>
         <div className="right-panel">
-          {menu && (
+          {orderPlaced ? (
             <>
-              <img src={menuImage} alt={menu} className="Menu-image" />
-              <h2>{menu}</h2>
-              <p>{recipe}</p>
+              <img src={BentoImage} alt="お弁当" className="Bento-image" />
+              <p>あなたにピッタリのヘルシー弁当をお届けします！</p>
+              <button onClick={handleReset}>もう一度注文する</button>
+            </>
+          ) : (
+            <>
+              <p>もうすぐ夜ご飯の時間だね！身長と体重を教えてくれたら、あなたにぴったりなお弁当を夜にお届けするよ♪ 税込1000円だよ！</p>
+              <input
+                type="number"
+                value={height}
+                onChange={e => setHeight(e.target.value)}
+                placeholder="身長を入力してください (cm)"
+              />
+              <input
+                type="number"
+                value={weight}
+                onChange={e => setWeight(e.target.value)}
+                placeholder="体重を入力してください (kg)"
+              />
+              <button onClick={handleOrder}>弁当を注文する</button>
             </>
           )}
+          
         </div>
       </div>
     </div>
