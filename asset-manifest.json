@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/bisyojonavi/static/css/main.024ec844.css",
+    "main.js": "/bisyojonavi/static/js/main.7b2322ca.js",
+    "static/media/background.png": "/bisyojonavi/static/media/background.330e37a07fc1cf7ea13f.png",
+    "static/media/girl_smiling.png": "/bisyojonavi/static/media/girl_smiling.5dde534f5422bd5b7ee4.png",
+    "static/media/girl.png": "/bisyojonavi/static/media/girl.c8f77ffae5cd93a5c26f.png",
+    "static/media/bento.jpg": "/bisyojonavi/static/media/bento.b3675c7890de05a92fe1.jpg",
+    "index.html": "/bisyojonavi/index.html",
+    "main.024ec844.css.map": "/bisyojonavi/static/css/main.024ec844.css.map",
+    "main.7b2322ca.js.map": "/bisyojonavi/static/js/main.7b2322ca.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.024ec844.css",
+    "static/js/main.7b2322ca.js"
+  ]
+}
